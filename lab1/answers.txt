@@ -1,0 +1,78 @@
+Answer the questions in this file after running AFL and IKOS on the
+7 test programs. The questions are organized into two parts: Part A
+concerns test1 thru test6, and Part B concerns test7.
+
+Part A: Follow the below instructions to fill in the table below.
+
+Each of the 6 C programs test1.c thru test6.c contains a single division
+instruction.
+
+First, inspect the code of each program, and fill in its ground truth
+(right/wrong) in the Ground Truth column: 
+
+- right if the program does not contain any divide-by-zero errors.
+- wrong if the program contains a divide-by-zero error.
+
+Next, refer to the logs of each analyzer's run on each program, and fill
+in its result (accept/reject) in the respective column:
+
+- accept if your analyzer does not report any divide-by-zero errors.
+- reject if your analyzer reports a divide-by-zero error.
+
+Lastly, use the above computed results to calculate Precision, Recall,
+and F-Measure scores for each analyzer on this suite of programs.
+
+========================================================================
+ Program  | Ground Truth |     AFL      | IKOS Interval |   IKOS DBM   |
+========================================================================
+test1.c   |    wrong     |    wrong     |   wrong       |  wrong       |
+test2.c   |    right     |    right     |   right       |  right       |
+test3.c   |    wrong     |    wrong     |   wrong       |  wrong       |
+test4.c   |    wrong     |    right     |   wrong       |  wrong       |
+test5.c   |    wrong     |    wrong     |   wrong       |  wrong       |
+test6.c   |    wrong     |    wrong     |   wrong       |  wrong       |
+========================================================================
+Precision |     \        |      1       |       1       |     1        |
+Recall    |     \        |      0.8     |       1       |     1        |
+F-measure |     \        |      8/9     |       1       |     1        |
+========================================================================
+
+Part B: Answer the below questions regarding test7.c. Provide short
+explanations to justify your answers.
+
+Question 1: On which lines, if any, does it contain divide-by-zero errors?
+
+Answer: line 14 (printf line) of the function taz contains divide-by-zero error. 
+Reason: At line 10, we could get from stdin 50, then with "data = fgetc(stdin) - c;" 
+where c=30, we get data=20. Note that dataref is the pointer to data hence in line 13, 
+we pass 20 to the new local variable data, and then in line 14, data-20=0, 
+therefore we get a divide-by-zero error.
+
+
+
+Question 2: On which lines, if any, does AFL report divide-by-zero errors?
+
+Answer: AFL reports the error at line 14 inside taz() function, to locate the error, 
+I run the executable ./test7 < [afl input file under crashes dir], and saw the error.
+One could also use gdb to step in to the specific line. 
+
+
+Question 3: What are the pros and cons of using the Interval versus DBM
+domains in IKOS on this program to find divide-by-zero errors?  Comment
+on both the accuracy and cost of the analyzer under these two domains.
+
+Answer: In terms of costs, DBM domains in IKOS costs much longer time as reported 
+in the log compared with Interval domain (10.941s versus 0.011 s).
+In terms of accuracy, though DBM domains has the drawback of high cost, 
+it is more accurate than Interval domain.
+Interval domain reports errors both at L14 (taz function) and L42 (baz function) 
+yet DBM only reports error at L14 (taz function). We know that the ground 
+truth is that only L14 contains the error, hence, Interval domain reports 
+a false positive for L42 while DBM does not have false positives in test7.
+
+
+
+
+
+
+

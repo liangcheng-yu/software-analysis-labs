@@ -1,0 +1,26 @@
+[*] Compiling c_programs/test2.c
+[*] Running ikos preprocessor
+[*] Running ikos analyzer
+[*] Translating LLVM bitcode to AR
+[*] Running liveness analysis
+[*] Running widening hint analysis
+[*] Running interprocedural value analysis
+[*] Analyzing entry point 'main'
+[*] Checking properties for entry point 'main'
+
+# Time stats:
+clang        : 0.041 sec
+ikos-analyzer: 0.019 sec
+ikos-pp      : 0.006 sec
+
+# Summary:
+Total number of checks                : 1
+Total number of unreachable checks    : 0
+Total number of safe checks           : 1
+Total number of definite unsafe checks: 0
+Total number of warnings              : 0
+
+The program is SAFE
+
+# Results
+No entries.

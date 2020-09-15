@@ -1,0 +1,29 @@
+[*] Compiling c_programs/test7.c
+[*] Running ikos preprocessor
+[*] Running ikos analyzer
+[*] Translating LLVM bitcode to AR
+[*] Running liveness analysis
+[*] Running widening hint analysis
+[*] Running interprocedural value analysis
+[*] Analyzing entry point 'main'
+[*] Checking properties for entry point 'main'
+
+# Time stats:
+clang        : 0.051 sec
+ikos-analyzer: 10.941 sec
+ikos-pp      : 0.007 sec
+
+# Summary:
+Total number of checks                : 3
+Total number of unreachable checks    : 0
+Total number of safe checks           : 2
+Total number of definite unsafe checks: 0
+Total number of warnings              : 1
+
+The program is potentially UNSAFE
+
+# Results
+c_programs/test7.c: In function 'taz':
+c_programs/test7.c:14:26: warning: divisor might be zero (divisor <= 2147483627)
+        printf("%d", 100 / (data - 20));
+                         ^

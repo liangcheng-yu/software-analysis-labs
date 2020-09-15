@@ -1,0 +1,29 @@
+[*] Compiling c_programs/test3.c
+[*] Running ikos preprocessor
+[*] Running ikos analyzer
+[*] Translating LLVM bitcode to AR
+[*] Running liveness analysis
+[*] Running widening hint analysis
+[*] Running interprocedural value analysis
+[*] Analyzing entry point 'main'
+[*] Checking properties for entry point 'main'
+
+# Time stats:
+clang        : 0.043 sec
+ikos-analyzer: 0.009 sec
+ikos-pp      : 0.007 sec
+
+# Summary:
+Total number of checks                : 1
+Total number of unreachable checks    : 0
+Total number of safe checks           : 0
+Total number of definite unsafe checks: 1
+Total number of warnings              : 0
+
+The program is definitely UNSAFE
+
+# Results
+c_programs/test3.c: In function 'main':
+c_programs/test3.c:9:10: error: division by zero
+    d = a/b;
+         ^

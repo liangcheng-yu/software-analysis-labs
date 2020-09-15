@@ -1,0 +1,5 @@
+**/build
+**/*.ll
+**/*.out
+**/*.cov
+*/.DS_Store
