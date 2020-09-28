@@ -2,4 +2,4 @@
 **/*.ll
 **/*.out
 **/*.cov
-*/.DS_Store
+**/.DS_Store

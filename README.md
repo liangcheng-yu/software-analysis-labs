@@ -1,2 +1,3 @@
 # software-analysis-labs
-cis 547
+
+A repo for the labs in CIS 547 @ UPenn by Mayur Naik.
