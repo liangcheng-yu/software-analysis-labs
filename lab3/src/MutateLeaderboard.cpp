@@ -111,28 +111,6 @@ std::string mutateInsert(std::string Origin) {
 }
 
 /**
- * 6: Multiple calls of mutateRemove
- */
-std::string mutateRemoveMultiple(std::string Origin) {
-  int NumCall = rand()%(Origin.size()/2);
-  for(int i=0; i<NumCall; i++) {
-    Origin = mutateRemove(Origin);
-  }
-  return Origin;
-}
-
-/**
- * 7: Multiple calls of mutateInsert
- */
-std::string mutateInsertMultiple(std::string Origin) {
-  int NumCall = rand()%Origin.size();
-  for(int i=0; i<NumCall; i++) {
-    Origin = mutateInsert(Origin);
-  }
-  return Origin;
-}
-
-/**
  * Given string Origin, return a mutate string.
  */
 std::string mutate(std::string Origin) {
@@ -148,11 +126,7 @@ std::string mutate(std::string Origin) {
     Origin = mutateRemoveMultiple(Origin);
   } else if(opt==4) {
     Origin = mutateInsertMultiple(Origin);
-  } else if(opt==5) {
-    Origin = mutateRemoveMultiple(Origin);
-  } else if(opt==6) {
-    Origin = mutateInsertMultiple(Origin);
-  }
+  } 
 #ifdef AVOID_DUPLICATE_MUTANT
   while(PastMutantMemo.find(Origin)!=PastMutantMemo.end()) {
     NumDuplicateMutant += 1;
@@ -166,10 +140,6 @@ std::string mutate(std::string Origin) {
     } else if(opt==3) {
       Origin = mutateRemoveMultiple(Origin);
     } else if(opt==4) {
-      Origin = mutateInsertMultiple(Origin);
-    } else if(opt==5) {
-      Origin = mutateRemoveMultiple(Origin);
-    } else if(opt==6) {
       Origin = mutateInsertMultiple(Origin);
     }
   }
